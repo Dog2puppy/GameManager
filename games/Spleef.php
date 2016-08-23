@@ -136,12 +136,8 @@ class Spleef extends Game {
         // $this->getLogger()->info("Game stoped");
         foreach($this->getLevel()->getPlayers() as $p) {
             $p->setGamemode(0);
-            if($p !== $this->winner) {
-            $p->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
-            $p->sendMessage("§l§o§6[§r§b§lSpleef§o§6]§r§f " . $this->winner->getName() . " won the game ! Teleporting back to spawn...");
-            } else {
-            $this->winner->sendMessage("§l§o§6[§r§b§lSpleef§o§6]§r§f You won the game ! Teleporting back to spawn...");
-            }
+            if(isset($this->getConfig()->get($this->getLevel()->getName())["PlayerTP"]) && ){
+            
             if(isset($this->getConfig()->get($this->getLevel()->getName())["WinCommand"])) {
                 $this->getServer()->dispatchCommand(new \pocketmine\command\ConsoleCommandSender(), str_ireplace("{winner}", $this->winner->getName(), $this->getConfig()->get($this->getLevel()->getName())["WinCommand"]));
             }
